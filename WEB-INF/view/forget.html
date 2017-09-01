@@ -1,0 +1,27 @@
+<#include "inc/layout.html" />
+<#macro import_css>
+
+</#macro>
+<#macro import_script>
+    <script type="text/javascript" src="${REQ}/assets/js/md5.min.js" ></script>
+    <script type="text/javascript" src="${REQ}/assets/js/app.forget.js" ></script>
+</#macro>
+<@layout title="忘记密码">
+<div class="zccontent">
+    <div class="header">
+        <span><img src="${REQ}/assets/img/zc_logo.png" alt=""/></span>
+        <b>|</b>
+        <span class="logoright">找回密码</span>
+        <span class="back"><a href="logout.html">返回登录&gt;</a></span>
+    </div>
+    <div class="registerinput">
+        <p><span class="left">用户名</span><input type="text" name="username" class="left" placeholder="请输入用户名/手机号码"/></p>
+        <div class="yzm"><span class="left">验证码</span><p class="left"><input type="text" name="yzm" placeholder="请输入验证码"/><input type="button" class="getyzm" value="获取验证码"></p></div>
+        <p class="psd"><span>密码</span><input type="password" name="psd" placeholder="请重置登录密码"/></p>
+        <p class="btn"><input type="button" value="确定"/></p>
+    </div>
+    <div class="weixin">
+        <img src="${REQ}/assets/img/ewm.png" alt=""/>
+    </div>
+</div>
+</@layout>

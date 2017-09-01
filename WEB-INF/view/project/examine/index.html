@@ -1,0 +1,75 @@
+<#include "inc/layout.html" />
+<#macro import_css>
+
+    <style>
+        .fzname:hover{
+            background:#e6e7ea;
+        }
+    </style>
+</#macro>
+<#macro import_script>
+    <script type="text/javascript" src="${REQ}/assets/js/app.examine.js" ></script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="add">+</a>
+        <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="add"><img src="${REQ}/assets/img/qx.png" alt=""/></a>
+    </script>
+
+</#macro>
+<@layout title="待审核班组">
+<!--待审核班组-->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo logo" style="width:100px"><a href="${REQ}/"><img src="${REQ}/assets/img/sy_logo.png" alt=""/></a></div>
+        <div id="dewm">
+            <img src="${REQ}/assets/img/ewm1.png" alt=""/>
+        </div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><img src="${REQ}/assets/img/hy.png" alt=""/></li>
+            <!--<li class="layui-nav-item"><a href="javascript:;"><span>&lt;</span><span>&gt;</span></a></li>-->
+            <li class="layui-nav-item"><a href="javascript:;" id="ewm"><img src="${REQ}/assets/img/zy_ewm.png" alt=""/></a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="${REQ}/profile.html" style="padding:0 6px">
+                    <img src="${REQ}/assets/img/zy_mrtx.png" alt=""/>
+                </a>
+                <!--<img src="http://res.ejegweb.com<@shiro.principal property='avatar'></@shiro.principal>" style="width:30px; height:30px;" />-->
+            </li>
+            <li class="layui-nav-item">你好，<span><@shiro.principal property="username"></@shiro.principal></span></li>
+            <li class="layui-nav-item"><img class="wrz" src="${REQ}/assets/img/yrz.png" alt=""/></li>
+            <li class="layui-nav-item lxdh" id="lxdh"><a href="javascript:;">联系电话</a></li>
+            <li class="layui-nav-item aqtc" id="aqtc"><a href="${REQ}/logout.html" class="tc">安全退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side">
+
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-this"><a href="javascript:;" class="dsh">待审核项目组</a></li>
+                <li class="layui-nav-item">
+                    <a href="${REQ}/project/list.html" class="mypro">我的项目(<span class="mypronum">0</span>)</a>
+                    <dl class="layui-nav-child myprolist">
+                        <dd class="cjbefore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="${REQ}/assets/img/zy_cbl_cjxfz.png" alt=""/></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="${REQ}/project/director.html" class="jldw">监理单位</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body identifybody">
+
+        <table id="demo" lay-filter="test" style="background:#000000">
+            <p  class="layui-table-header" style="background: #ffffff;border:1px solid #d6d7dc;width:979px;line-height:45px;padding-left: 20px;font-size:17px;">待审核项目组</p>
+
+        </table>
+
+    </div>
+
+
+</div>
+</@layout>

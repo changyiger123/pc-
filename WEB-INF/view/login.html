@@ -1,0 +1,30 @@
+<#include "inc/layout.html" />
+<#macro import_script>
+    <script type="text/javascript" src="${REQ}/assets/js/md5.min.js" ></script>
+    <script type="text/javascript" src="${REQ}/assets/js/app.login.js" ></script>
+</#macro>
+<#macro import_css>
+    <style>
+        body{
+            overflow-y: hidden;
+        }
+    </style>
+</#macro>
+<@layout bodyCss="login-body-bg">
+<div class="content">
+    <img class="logo" src="${REQ}/assets/img/login_logo.png" alt="易工家"/>
+    <div class="loginput">
+        <p>欢迎登录</p>
+        <p><input class="typein" name="username" type="text" placeholder="用户名/手机号码"/></p>
+        <p><input class="typein" name="password" type="password" placeholder="密码"/></p>
+        <p><span><input class="checkin" name="rememberMe" type="checkbox" checked="checked"/>下次自动登录</span><a href="forget.html">忘记密码?</a></p>
+        <p id="loginBtn" >登录</p>
+        <p><a href="${REQ}/register.html">立即注册</a></p>
+    </div>
+    <div class="footer">
+        <p><span><img src="${REQ}/assets/img/login_dh.png" alt=""/>&nbsp;&nbsp;全国服务电话：400-518-571</span></p>
+        <p><span>地址：中国·杭州·萧山区·金城路358号蓝爵国际大厦18楼1805室</span></p>
+        <p><span>©2009-2015 Ejegweb.com All Rights Reserved. 浙ICP备15031137号</span></p>
+    </div>
+</div>
+</@layout>

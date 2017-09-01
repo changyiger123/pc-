@@ -1,0 +1,75 @@
+<#include "inc/layout.html" />
+<#macro import_script>
+	<script type="text/html" id="barDemo">
+		<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="add">+</a>
+		<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+	</script>
+	<script type="text/javascript" src="${REQ}/assets/js/app.index.js"></script>
+</#macro>
+<#macro import_css>
+
+</#macro>
+<@layout title="首页">
+<div class="layui-layout layui-layout-admin">
+	<div class="layui-header">
+		<div class="layui-logo logo" style="width:100px"><img src="${REQ}/assets/img/sy_logo.png" alt=""/></div>
+		<div id="dewm">
+			<img src="${REQ}/assets/img/ewm1.png" alt=""/>
+		</div>
+		<!-- 头部区域（可配合layui已有的水平导航） -->
+		<ul class="layui-nav layui-layout-left">
+			<li class="layui-nav-item"><img src="${REQ}/assets/img/hy.png" alt=""/></li>
+			<!--<li class="layui-nav-item"><a href="javascript:;"><span>&lt;</span><span>&gt;</span></a></li>-->
+			<li class="layui-nav-item"><a href="javascript:;" id="ewm"><img src="${REQ}/assets/img/zy_ewm.png" alt=""/></a></li>
+		</ul>
+		<ul class="layui-nav layui-layout-right">
+			<li class="layui-nav-item">
+				<a href="${REQ}/profile.html" style="padding:0 6px">
+					<img src="${REQ}/assets/img/zy_mrtx.png" alt=""/>
+				</a>
+				<!--<img src="http://res.ejegweb.com<@shiro.principal property='avatar'></@shiro.principal>" style="width:30px; height:30px;" />-->
+			</li>
+			<li class="layui-nav-item">你好，<span><@shiro.principal property="username"></@shiro.principal></span></li>
+			<li class="layui-nav-item"><img class="wrz" src="${REQ}/assets/img/wrz.png" alt=""/></li>
+			<li class="layui-nav-item lxdh" id="lxdh"><a href="javascript:;">联系电话</a></li>
+			<li class="layui-nav-item aqtc" id="aqtc"><a href="logout.html" class="tc">安全退出</a></li>
+		</ul>
+	</div>
+
+	<div class="layui-side forbidside">
+
+		<div class="layui-side-scroll">
+			<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+			<ul class="layui-nav layui-nav-tree" lay-filter="test">
+				<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+				<li class="layui-nav-item"><a href="${REQ}/project/examine.html" class="dsh">待审核项目组<span></span></a></li>
+				<li class="layui-nav-item">
+					<a href="${REQ}/project/list.html" class="mypro">我的项目<span></span></a>
+					<dl class="layui-nav-child">
+						<!--<dd><a href="javascript:;">未分组</a></dd>-->
+						<!--<dd><a href="javascript:;">杭州项目</a></dd>-->
+						<dd class="cjbefore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="${REQ}/assets/img/zy_cbl_cjxfz.png" alt=""/></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item"><a href="${REQ}/project/director.html" class="jldw">监理单位</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="layui-body identifybody">
+		<!-- 内容主体区域 -->
+		<div class="rz">
+
+
+		</div>
+
+
+
+	</div>
+
+
+</div>
+
+
+
+</@layout>

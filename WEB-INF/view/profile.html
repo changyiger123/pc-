@@ -1,0 +1,77 @@
+<#include "inc/layout.html" />
+<#macro import_css>
+
+</#macro>
+<#macro import_script>
+    <script type="text/javascript" src="${REQ}/assets/js/app.profile.js"></script>
+</#macro>
+<@layout title="账号信息">
+<!--账号信息-->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo logo" style="width:100px"><img src="${REQ}/assets/img/sy_logo.png" alt=""/></div>
+        <div id="dewm">
+            <img src="${REQ}/assets/img/ewm1.png" alt=""/>
+        </div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><img src="${REQ}/assets/img/hy.png" alt=""/></li>
+            <!--<li class="layui-nav-item"><a href="javascript:;"><span>&lt;</span><span>&gt;</span></a></li>-->
+            <li class="layui-nav-item"><a href="javascript:;" id="ewm"><img src="${REQ}/assets/img/zy_ewm.png" alt=""/></a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="${REQ}/profile.html" style="padding:0 6px">
+                    <img src="${REQ}/assets/img/zy_mrtx.png" alt=""/>
+                </a>
+                <!--<img src="http://res.ejegweb.com<@shiro.principal property='avatar'></@shiro.principal>" style="width:30px; height:30px;" />-->
+            </li>
+            <li class="layui-nav-item">你好，<span><@shiro.principal property="username"></@shiro.principal></span></li>
+            <li class="layui-nav-item"><img class="wrz" src="${REQ}/assets/img/yrz.png" alt=""/></li>
+            <li class="layui-nav-item lxdh" id="lxdh"><a href="javascript:;">联系电话</a></li>
+            <li class="layui-nav-item aqtc" id="aqtc"><a href="logout.html" class="tc">安全退出</a></li>
+        </ul>
+    </div>
+
+    <div class="pcencerbody">
+        <div class="pcentertop">
+            <p class="pcentertitle">编辑个人信息</p>
+            <div class="personalinfo">
+                <dl id="test3">
+                    <dt><img src="${REQ}/assets/img/grxx_tx.png" alt="" class="avatar" id="demo3"/></dt>
+                    <dd class="changeavtar"><a href="javascript:;">修改头像</a></dd>
+                </dl>
+                <div class="nameinfo">
+                    <p>用户名:<span class="realname">王明丹</span></p>
+                    <p>手机号码:<span class="mobile">13966674229</span><a href="${REQ}/reset/password.html" class="changemobile">修改号码</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="pcenterbottom">
+            <p class="pcentertitle">企业信息</p>
+            <div class="yytitle"><p>营业执照</p><span></span></div>
+            <dl>
+                <dt>
+                    <img src="${REQ}/assets/img/sczp.png" alt="" class="businessUrl"/>
+                </dt>
+                <dd>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;企业名称: <span class="cname">浙江某某公司</span></p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;注册地址: <span class="address">浙江省杭州市萧山区</span></p>
+                    <p>营业执照号: <span class="businessCode">35645115656</span></p>
+                </dd>
+            </dl>
+            <div class="yytitle"><p>资质证书</p><span></span></div>
+            <dl>
+                <dt>
+                    <img src="${REQ}/assets/img/sczp.png" alt="" class="certificatesUrl"/>
+                </dt>
+                <dd>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;证书编号: <span class="certificatesCode">56123265</span></p>
+                </dd>
+            </dl>
+        </div>
+
+    </div>
+
+</div>
+</@layout>

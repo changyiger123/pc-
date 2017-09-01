@@ -1,0 +1,109 @@
+<#include "inc/layout.html" />
+<#macro import_css>
+    <style>
+        .layui-layer-btn .layui-layer-btn0,.layui-layer-btn .layui-layer-btn1{
+            width:58px;
+            height:26px;
+            border:1px solid #d6d7dc !important;
+            display: block;
+            float: right;
+            background-color: #ffffff !important;
+            color:#000000 !important;
+            font-size: 13px !important;
+            line-height:26px;
+            text-align: center;
+            margin-top:-26px;
+        }
+        #pj {
+            padding-left: 30px;
+            padding-top: 20px;
+            border-top:1px solid #d6d7dc;
+
+        }
+        #pj p{
+            font-size: 12px;
+            line-height:24px;
+            color:#666666;
+        }
+        #pj input[type=checkbox]{
+            width:14px;
+            height:14px;
+            border:1px solid #d6d7dc;
+        }
+        #pj p .listfa{
+            color:#000000;
+        }
+    </style>
+</#macro>
+<#macro import_script>
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="add"><img src="${REQ}/assets/img/qx.png" alt=""/></a>
+    </script>
+    <script type="text/javascript" src="${REQ}/assets/js/app.director.js"></script>
+</#macro>
+<@layout title="监理单位">
+<!--待审核班组-->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo logo" style="width:100px"><a href="${REQ}/"><img src="${REQ}/assets/img/sy_logo.png" alt=""/></a></div>
+        <div id="dewm">
+            <img src="${REQ}/assets/img/ewm1.png" alt=""/>
+        </div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><img src="${REQ}/assets/img/hy.png" alt=""/></li>
+            <!--<li class="layui-nav-item"><a href="javascript:;"><span>&lt;</span><span>&gt;</span></a></li>-->
+            <li class="layui-nav-item"><a href="javascript:;" id="ewm"><img src="${REQ}/assets/img/zy_ewm.png" alt=""/></a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="${REQ}/profile.html" style="padding:0 6px">
+                    <img src="${REQ}/assets/img/zy_mrtx.png" alt=""/>
+                </a>
+                <!--<img src="http://res.ejegweb.com<@shiro.principal property='avatar'></@shiro.principal>" style="width:30px; height:30px;" />-->
+            </li>
+            <li class="layui-nav-item">你好，<span><@shiro.principal property="username"></@shiro.principal></span></li>
+            <li class="layui-nav-item"><img class="wrz" src="${REQ}/assets/img/yrz.png" alt=""/></li>
+            <li class="layui-nav-item lxdh" id="lxdh"><a href="javascript:;">联系电话</a></li>
+            <li class="layui-nav-item aqtc" id="aqtc"><a href="${REQ}/logout.html" class="tc">安全退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side">
+
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item"><a href="${REQ}/project/examine.html" class="dsh">待审核项目组<span></span></a></li>
+                <li class="layui-nav-item">
+                    <a href="${REQ}/project/list.html" class="mypro">我的项目(<span class="mypronum">0</span>)</a>
+                    <dl class="layui-nav-child myprolist">
+                        <!--<dd><a href="javascript:;">未分组</a></dd>-->
+                        <!--<dd><a href="javascript:;">杭州项目</a></dd>-->
+                        <dd class="cjbefore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="${REQ}/assets/img/zy_cbl_cjxfz.png" alt=""/></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-this"><a href="javascript:;" class="jldw">监理单位</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body identifybody">
+        <!-- 内容主体区域 -->
+
+        <!--<table class="layui-table" lay-data="{height:300, url:'${REQ}/project/director/list.json', page:true, id:'test'}" lay-filter="test">-->
+        <table id="demo" lay-filter="test">
+            <p  class="layui-table-header" style="background: #ffffff;border:1px solid #d6d7dc;width:979px;line-height:45px;padding-left: 20px;font-size:17px;">监理单位</p>
+
+        </table>
+        <div id="pj" style="display:none">
+
+        </div>
+
+    </div>
+
+
+</div>
+</@layout>
