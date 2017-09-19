@@ -1,23 +1,100 @@
 <#include "inc/layout.html" />
 <#macro import_css>
-
 </#macro>
 <#macro import_script>
-    <script type="text/javascript" src="${REQ}/assets/js/app.profile.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+
+            $.ajax({url:"profile/info",type:"GET",dataType:"json",success:function(result){
+                if(result.code==0){
+                    $('.avatar').attr('src', result.content.owner.avatar); //图片链接（base64）
+                    $('.businessUrl').attr('src', result.content.subject.avatar); //图片链接（base64）
+                    //$('.certificatesUrl').attr('src', result.content.subject.certificatesUrl); //图片链接（base64）
+                    $('.realname').html(result.content.owner.realname);
+                    $('.mobile').html(result.content.owner.mobile);
+                    $('.cname').html(result.content.subject.cname);
+                    $('.address').html(result.content.subject.address);
+                    $('.businessCode').html(result.content.subject.businessCode);
+                    $('.certificatesCode').html(result.content.subject.certificatesCode);
+                }
+            }});
+
+
+
+            $('.changeavtar').on('click',function(){
+
+            })
+
+            layui.use('upload', function(){
+                var upload = layui.upload;
+                //执行实例
+                var uploadInst = upload.render({
+                    elem: '#test3'
+                    ,url: '${REQ}/uploader.html'
+                    ,method:'post'
+                    ,data:{
+                        type:'avatar'
+                    }
+                    ,accept:'images'
+                    ,auto:true
+                    ,size:2000
+                    ,multiple:false
+                    ,before: function(obj){
+                        //预读本地文件示例，不支持ie8
+                        obj.preview(function(index, file, result){
+                            //console.log(result);
+                            $('#demo3').attr('src', result); //图片链接（base64）
+                        });
+                    }
+                    ,done: function(res,index,upload){
+                        //如果上传失败
+                        //console.log(res);
+                        var imgback=res.content.url;
+                        if(res.code == 0){
+                            ajaxData("user/avatar.html","avatar="+imgback,function(data){
+                                if(data.code==0){
+                                    $('#demo3').src=imgback;
+//                                    $('.btavatar').attr('src',imgback)
+                                    alert('头像修改成功')
+                                }else if(data.code==-2){
+                                    alert('头像地址不能为空')
+                                }
+
+                            })
+                        }
+
+                        //上传成功
+                    }
+                    ,error: function(){
+                        //演示失败状态，并实现重传
+                        var demoText = $('#demoText');
+                        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                        demoText.find('.demo-reload').on('click', function(){
+                            uploadInst.upload();
+                        });
+                    }
+                });
+                //执行实例
+            });
+
+        })
+
+
+    </script>
 </#macro>
 <@layout title="账号信息">
 <!--账号信息-->
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo logo" style="width:100px"><img src="${REQ}/assets/img/sy_logo.png" alt=""/></div>
+        <div class="layui-logo logo" style="width:100px"><div class="mainlogo"></div></div>
         <div id="dewm">
-            <img src="${REQ}/assets/img/ewm1.png" alt=""/>
+
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><img src="${REQ}/assets/img/hy.png" alt=""/></li>
-            <!--<li class="layui-nav-item"><a href="javascript:;"><span>&lt;</span><span>&gt;</span></a></li>-->
-            <li class="layui-nav-item"><a href="javascript:;" id="ewm"><img src="${REQ}/assets/img/zy_ewm.png" alt=""/></a></li>
+            <li class="layui-nav-item"><div class="welcome"></div></li>
+            <li class="layui-nav-item"><a href="javascript:;" id="ewm"></a></li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -29,7 +106,7 @@
             <li class="layui-nav-item">你好，<span><@shiro.principal property="username"></@shiro.principal></span></li>
             <li class="layui-nav-item"><img class="wrz" src="${REQ}/assets/img/yrz.png" alt=""/></li>
             <li class="layui-nav-item lxdh" id="lxdh"><a href="javascript:;">联系电话</a></li>
-            <li class="layui-nav-item aqtc" id="aqtc"><a href="logout.html" class="tc">安全退出</a></li>
+            <li class="layui-nav-item aqtc" id="aqtc"><a href="${REQ}/logout.html" class="tc">安全退出</a></li>
         </ul>
     </div>
 
@@ -38,12 +115,12 @@
             <p class="pcentertitle">编辑个人信息</p>
             <div class="personalinfo">
                 <dl id="test3">
-                    <dt><img src="${REQ}/assets/img/grxx_tx.png" alt="" class="avatar" id="demo3"/></dt>
+                    <dt><img style="width:160px;height:160px;" src="${REQ}/assets/img/grxx_tx.png" alt="" class="avatar" id="demo3"/></dt>
                     <dd class="changeavtar"><a href="javascript:;">修改头像</a></dd>
                 </dl>
                 <div class="nameinfo">
-                    <p>用户名:<span class="realname">王明丹</span></p>
-                    <p>手机号码:<span class="mobile">13966674229</span><a href="${REQ}/reset/password.html" class="changemobile">修改号码</a></p>
+                    <p>用户名:<span class="realname"></span></p>
+                    <p>手机号码:<span class="mobile"></span><a href="${REQ}/reset/password.html" class="changemobile">修改号码</a></p>
                 </div>
             </div>
         </div>
@@ -55,9 +132,9 @@
                     <img src="${REQ}/assets/img/sczp.png" alt="" class="businessUrl"/>
                 </dt>
                 <dd>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;企业名称: <span class="cname">浙江某某公司</span></p>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;注册地址: <span class="address">浙江省杭州市萧山区</span></p>
-                    <p>营业执照号: <span class="businessCode">35645115656</span></p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;企业名称: <span class="cname"></span></p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;注册地址: <span class="address"></span></p>
+                    <p>营业执照号: <span class="businessCode"></span></p>
                 </dd>
             </dl>
             <div class="yytitle"><p>资质证书</p><span></span></div>
@@ -66,7 +143,7 @@
                     <img src="${REQ}/assets/img/sczp.png" alt="" class="certificatesUrl"/>
                 </dt>
                 <dd>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;证书编号: <span class="certificatesCode">56123265</span></p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;证书编号: <span class="certificatesCode"></span></p>
                 </dd>
             </dl>
         </div>

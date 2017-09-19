@@ -5,7 +5,7 @@ $.ajax({url:"profile/info",type:"GET",dataType:"json",success:function(result){
     if(result.code==0){
         $('.avatar').attr('src', result.content.owner.avatar); //图片链接（base64）
         $('.businessUrl').attr('src', result.content.subject.avatar); //图片链接（base64）
-        //$('.certificatesUrl').attr('src', result.content.subject.certificatesUrl); //图片链接（base64）
+        $('.certificatesUrl').attr('src', result.content.subject.certificatesUrl); //图片链接（base64）
         $('.realname').html(result.content.owner.realname);
         $('.mobile').html(result.content.owner.mobile);
         $('.cname').html(result.content.subject.cname);
@@ -14,9 +14,6 @@ $.ajax({url:"profile/info",type:"GET",dataType:"json",success:function(result){
         $('.certificatesCode').html(result.content.subject.certificatesCode);
     }
 }});
-//            $('.changeavtar').on('click',function(){
-//                alert(1);
-//            })
 layui.use('upload', function(){
     var upload = layui.upload;
     //执行实例
@@ -46,7 +43,6 @@ layui.use('upload', function(){
                 ajaxData("user/avatar.html","avatar="+imgback,function(data){
                     if(data.code==0){
                         $('#demo3').src=imgback;
-//                                    $('.btavatar').attr('src',imgback)
                         alert('头像修改成功')
                     }else if(data.code==-2){
                         alert('头像地址不能为空')

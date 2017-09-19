@@ -3,33 +3,70 @@
 <#macro import_script></#macro>
 <#macro import_css></#macro>
 <#macro layout title>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <META HTTP-EQUIV="pragma" CONTENT="no-cache">
-        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
-        <META HTTP-EQUIV="expires" CONTENT="0">
-        <title>${title!"登录"} - 浙江易建易工网络科技有限公司</title>
-        <link href="${REQ}/assets/favicon/favicon@5.ico" rel="apple-touch-icon" type="image/png" sizes="144x144">
-        <link href="${REQ}/assets/favicon/favicon@5.ico" rel="apple-touch-icon" type="image/png" sizes="114x114">
-        <link href="${REQ}/assets/favicon/favicon@4.ico" rel="apple-touch-icon" type="image/png" sizes="72x72">
-        <link href="${REQ}/assets/favicon/favicon@3.ico" rel="apple-touch-icon" type="image/png">
-        <link href="${REQ}/assets/favicon/favicon@2.ico" rel="icon" type="image/png">
-        <link href="${REQ}/assets/favicon/favicon.ico" rel="shortcut icon" type="image/x-icon">
-        <link rel="stylesheet" type="text/css" href="${REQ}/assets/css/layui.css">
-        <link rel="stylesheet" href="${REQ}/assets/css/app.css" />
-        <@import_css />
-    </head>
-    <body>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>${title!"登录"} - 浙江易建易工网络科技有限公司</title>
+    <link href="${REQ}/assets/favicon/favicon@5.ico" rel="apple-touch-icon" type="image/png" sizes="144x144">
+    <link href="${REQ}/assets/favicon/favicon@5.ico" rel="apple-touch-icon" type="image/png" sizes="114x114">
+    <link href="${REQ}/assets/favicon/favicon@4.ico" rel="apple-touch-icon" type="image/png" sizes="72x72">
+    <link href="${REQ}/assets/favicon/favicon@3.ico" rel="apple-touch-icon" type="image/png">
+    <link href="${REQ}/assets/favicon/favicon@2.ico" rel="icon" type="image/png">
+    <link href="${REQ}/assets/favicon/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="${REQ}/assets/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="${REQ}/assets/css/app.css">
+<@import_css />
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo logo" style="width:100px"><div class="mainlogo"></div></div>
+        <div id="dewm">
+
+        </div>
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><div class="welcome"></div></li>
+            <li class="layui-nav-item"><a href="javascript:;" id="ewm"></a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="${REQ}/profile.html" style="padding:0 6px">
+                    <img src="${REQ}/assets/img/zy_mrtx.png" alt=""/>
+                </a>
+            </li>
+            <li class="layui-nav-item">你好，<span><@shiro.principal property="username"></@shiro.principal></span></li>
+            <li class="layui-nav-item"><img class="wrz" src="${REQ}/assets/img/wrz.png" alt=""/></li>
+            <li class="layui-nav-item lxdh" id="lxdh"><a href="javascript:;">联系电话</a></li>
+            <li class="layui-nav-item aqtc" id="aqtc"><a href="/logout.html" class="tc">安全退出</a></li>
+        </ul>
+    </div>
+    <div class="layui-side forbidside">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item"><a href="${REQ}/project/examine.html" class="dsh">待审核项目组<span></span></a></li>
+                <li class="layui-nav-item">
+                    <a href="${REQ}/project/list.html" class="mypro">我的项目<span></span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="${REQ}/project/list/0.html">未分组</a></dd>
+                        <dd class="cjbefore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="${REQ}/assets/img/zy_cbl_cjxfz.png" alt=""/></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="${REQ}/project/director.html" class="jldw">监理单位</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body identifybody">
         <#nested>
-        <script type="text/javascript">window.BASE_URL = "${REQ}";</script>
-        <script type="text/javascript" src="${REQ}/assets/js/jquery.min.js" ></script>
-        <script type="text/javascript" src="${REQ}/assets/layui.js"></script>
-        <script type="text/javascript" src="${REQ}/assets/js/ajaxData.js" ></script>
-        <@import_script />
-    </body>
-    </html>
+    </div>
+</div>
+<script type="text/javascript">window.BASE_URL = "${REQ}";</script>
+<script type="text/javascript" src="${REQ}/assets/js/jquery.min.js" ></script>
+<script type="text/javascript" src="${REQ}/assets/layui.js"></script>
+<script type="text/javascript" src="${REQ}/assets/js/app.js" ></script>
+<@import_script />
+</body>
+</html>
 </#macro>

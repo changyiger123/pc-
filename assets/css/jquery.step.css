@@ -61,6 +61,7 @@ body {
     display: inline-block;
     width: 26px;
     height: 26px;
+    line-height:26px;
     border-radius: 50%;
     background: #dad9d9;
 }

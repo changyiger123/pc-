@@ -10,10 +10,13 @@ layui.use('layer', function(){
     function settime(val) {
         if (countdown == 0) {
             val.removeAttribute("disabled");
+            val.style.backgroundColor='#ffa800';
             val.value="获取验证码";
             countdown = 60;
+            return;
         } else {
             val.setAttribute("disabled", true);
+            val.style.backgroundColor='#cccccc';
             val.value="重新发送(" + countdown + ")";
             countdown--;
         }
@@ -21,11 +24,19 @@ layui.use('layer', function(){
             settime(val)
         },1000)
     }
+    var rmobile = /^1[3|4|5|8][0-9]\d{4,8}$/;
+    $("input[name='username']").blur(function(){
+        var username = $("input[name='username']").val();
+        if(!rmobile.test(username)){
+            this.placeholder='不是完整的11位手机号或者正确的手机号前七位';
+            this.value=''
+        }
+    });
     $('.getyzm').on('click',function(){
         var that=this;
         var username = $("input[name='username']").val();
         if(username==''){
-            layer.msg("用户名不能为空", {icon: 5});
+            layer.msg("此用户尚未注册", {icon: 5});
         }else{
             ajaxData('code/send.html',"username="+username+"&type=reset",function(data){
                 if(data.code==0){

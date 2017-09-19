@@ -1,19 +1,7 @@
 <#include "inc/layout.html" />
 <#macro import_css>
+
     <style>
-        .layui-layer-btn .layui-layer-btn0,.layui-layer-btn .layui-layer-btn1{
-            width:58px;
-            height:26px;
-            border:1px solid #d6d7dc !important;
-            display: block;
-            float: right;
-            background-color: #ffffff !important;
-            color:#000000 !important;
-            font-size: 13px !important;
-            line-height:26px;
-            text-align: center;
-            margin-top:-26px;
-        }
         #pj {
             padding-left: 30px;
             padding-top: 20px;
@@ -36,25 +24,161 @@
     </style>
 </#macro>
 <#macro import_script>
-
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="add"><img src="${REQ}/assets/img/qx.png" alt=""/></a>
+        <a class="layui-btn layui-btn-primary layui-btn-mini qx" lay-event="add"></a>
     </script>
-    <script type="text/javascript" src="${REQ}/assets/js/app.director.js"></script>
+    <script>
+        $(function(){
+            layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element'], function(){
+                var laydate = layui.laydate //日期
+                        ,laypage = layui.laypage //分页
+                        ,layer = layui.layer //弹层
+                        ,table = layui.table //表格
+                        ,carousel = layui.carousel //轮播
+                        ,upload = layui.upload //上传
+                        ,element = layui.element; //元素操作
+                $.ajax({url:"${REQ}/project/team.html",data:"page=1&limit=30",type:"GET",dataType:"json",success:function(result){
+                    $('.mypronum').html(result.content.length);
+                    var myList='';
+                    var myListson='';
+                    for(var i=0;i<result.content.length;i++){
+                        myList+='<a href="javascript:;" class="fzname" data-id="'+result.content[i].id+'">'+result.content[i].tname+ '</a>'
+                    }
+                    $('.myprolist').prepend(myList);
+                    $('.myprolist').on('click','a',function(){
+                        //alert(this.innerHTML)\
+                        $(this).addClass('red').siblings().removeClass('red');
+                        $('.zmtitle').html(this.innerHTML);
+                        var teamid=$(this).attr('data-id');
+                        console.log(teamid);
+                            table.render({
+                                elem: '#demo' //指定原始表格元素选择器（推荐id选择器）
+                                ,height:300 //容器高度
+                                ,width:1000
+                                ,page:true
+                                ,limit:10
+                                ,id:'test'
+                                ,cols:  [[ //标题栏
+                                    {field: 'name', title: '班组名称', width:200}
+                                    ,{field: 'name', title: '承包人', width:200}
+                                    ,{field: 'name', title: '班组长', width:200}
+                                    ,{field: 'name', title: '工人数', width:200}
+                                    ,{fixed: 'right', width:195, align:'center',title: '操作', toolbar: '#barDemo'}
+                                ]]//设置表头
+                                ,url:"${REQ}/project/list/"+teamid+".html"
+                            });
+                    })
+
+                }});
+                table.render({
+                    elem: '#demo' //指定原始表格元素选择器（推荐id选择器）
+                    ,height:300 //容器高度
+                    ,width:1000
+                    ,page:true
+                    ,limit:10
+                    ,id:'test'
+                    ,cols:  [[ //标题栏
+                        {field: 'sname', title: '姓名单位名称', width:500}
+                        ,{fixed: 'right', width:495, align:'center',title: '权限设置', toolbar: '#barDemo'}
+                    ]]//设置表头
+                    ,url: '${REQ}/project/director/list.html'
+
+                });
+                $.ajax({url:"${REQ}/project/team/list.html",type:"GET",dataType:"json",success:function(result){
+                    console.log(result);
+                    var str='';
+                    if(result.code==0){
+                        for(var i=0;i<result.content.length;i++){
+                            var projects = result.content[i].project;
+                            if(projects.length>0){
+                                str+='<p>'+'<input type="checkbox"/>'+'<span class="listfa">'+result.content[i].tname+'</span>'+'</p>';
+                                var strson='';
+                                for(var j=0;j<projects.length;j++){
+                                    strson+='<p>'+'<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>'+'<input type="checkbox" name="tests"/>'+'<span style="display: none">'+projects[j].id+'</span>'+'<span class="listso" dataId="'+projects[j].id+'">'+projects[j].name+'</span>'+'</p>';
+                                }
+                                str+=strson;
+                            }
+                        }
+                        $('#pj').html(str);
+                    }else{
+                        alert('获取项目失败');
+                    }
+
+                }});
+                //监听工具条
+                table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                    var data = obj.data //获得当前行数据
+                    ,layEvent = obj.event; //获得 lay-event 对应的值
+                    console.log(data);
+                    var strs='';
+                    var supervisionId = data.id;
+                    var subjectRelationIds=[];
+                    if(layEvent === 'add'){
+                        //console.log(data);
+                        layer.open({
+                            type:1 //此处以iframe举例
+                            ,title: data.sname+'权限设置'
+                            ,area: ['385px', '308px']
+                            ,shade: 0
+                            ,maxmin:false
+                            ,closeBtn: 0
+                            ,content:$('#pj')
+                            ,btn: ['取消', '确认'] //只是为了演示
+                            ,btn1: function(){
+
+                                layer.closeAll();
+                            }
+                            ,btn2: function(){
+                                $("input:checkbox[name='tests']:checked").each(function(){
+                                    subjectRelationIds.push($(this).next().text());
+                                })
+//                                subjectRelationIds.push(strs);
+                                console.log(subjectRelationIds);
+//                                console.log(typeof (strs));
+//                                console.log(strs);
+                                ajaxData("project/director/add.html","supervisionId="+supervisionId+"&subjectRelationIds="+subjectRelationIds,function(data){
+                                    console.log(data);
+                                    if(data.code==0){
+                                        alert('授权成功')
+                                    }else if(data.code==-2){
+                                        alert(data.message);
+                                    }
+                                });
+                                layer.closeAll();
+                            }
+
+                            ,zIndex: layer.zIndex //重点1
+                            ,success: function(layero){
+                                var btn = layero.find('.layui-layer-btn');
+                                btn.find('.layui-layer-btn0').css({'background-color':'#ffffff','border-color':'#d6d7dc','color':'#333'})
+                                layer.setTop(layero); //重点2
+                            }
+                        });
+
+
+                    }
+                });
+
+
+
+            });
+
+        })
+
+    </script>
 </#macro>
 <@layout title="监理单位">
 <!--待审核班组-->
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo logo" style="width:100px"><a href="${REQ}/"><img src="${REQ}/assets/img/sy_logo.png" alt=""/></a></div>
+        <div class="layui-logo logo" style="width:100px"><div class="mainlogo"></div></div>
         <div id="dewm">
-            <img src="${REQ}/assets/img/ewm1.png" alt=""/>
+
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><img src="${REQ}/assets/img/hy.png" alt=""/></li>
-            <!--<li class="layui-nav-item"><a href="javascript:;"><span>&lt;</span><span>&gt;</span></a></li>-->
-            <li class="layui-nav-item"><a href="javascript:;" id="ewm"><img src="${REQ}/assets/img/zy_ewm.png" alt=""/></a></li>
+            <li class="layui-nav-item"><div class="welcome"></div></li>
+            <li class="layui-nav-item"><a href="javascript:;" id="ewm"></a></li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -96,7 +220,6 @@
         <!--<table class="layui-table" lay-data="{height:300, url:'${REQ}/project/director/list.json', page:true, id:'test'}" lay-filter="test">-->
         <table id="demo" lay-filter="test">
             <p  class="layui-table-header" style="background: #ffffff;border:1px solid #d6d7dc;width:979px;line-height:45px;padding-left: 20px;font-size:17px;">监理单位</p>
-
         </table>
         <div id="pj" style="display:none">
 

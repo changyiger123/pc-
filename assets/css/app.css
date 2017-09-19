@@ -2,6 +2,7 @@
 *{
     margin:0;
     padding:0;
+    font-family: "Microsoft YaHei" ! important;
 }
 input{
     margin:0;
@@ -44,6 +45,7 @@ img{
     height:54px;
     left:0;
     top:31px;
+    background: url(../img/total.png) no-repeat 0 0;
 }
 .loginput{
     width:400px;
@@ -80,15 +82,18 @@ input::-webkit-input-placeholder{
     width:296px;
     color:#000000;
     text-indent: 19px;
+    border:1px solid #d4d7dd;
 }
 .loginput p:nth-child(1){
     font-size: 22px;
 }
 .loginput p:nth-child(2) input:focus{
-    border: 1px solid #00a0e8;
+    outline: none;
+    border-color:#00a0e8;
 }
 .loginput p:nth-child(3) input:focus{
-    border: 1px solid #00a0e8;
+    outline: none;
+    border-color:#00a0e8;
 }
 .loginput p:nth-child(4){
     height:12px;
@@ -147,48 +152,65 @@ input::-webkit-input-placeholder{
     height:17px;
 }
 /*侧边栏和头部页面样式*/
+.mainlogo{
+    width:108px;
+    height:50px;
+    background: url(../img/total.png) no-repeat 0 -116px;
+    cursor: pointer;
+}
+.welcome{
+    width:91px;
+    height:50px;
+    background: url(../img/total.png) no-repeat 0 -64px;
+}
+#ewm{
+    margin-left: 20px;
+    height:50px;
+    background: url(../img/total.png) no-repeat -741px -64px;
+}
 #dewm{
-    width:152px;
-    height:177px;
+    width:160px;
+    height:187px;
     position:fixed;
     top:60px;
     left:260px;
     display: none;
     z-index: 99999;
+    background: url(../img/total.png) no-repeat -400px -303px;
 }
-.lxdh{
-    background: url(../img/lxdh.png) no-repeat left center;
+#lxdh{
+    background: url(../img/total.png) no-repeat -149px -114px;
     margin-left: 20px;
 }
 #lxdh a{
     color:#ffffff;
     margin-left:32px;
 }
-.aqtc{
-    background: url(../img/zy_tc.png) no-repeat left center;
+#aqtc{
+    background: url(../img/total.png) no-repeat -101px -64px;
 }
 #aqtc a{
     color:#ffffff;
     margin-left:28px;
 }
 .dsh{
-    background: url(../img/zy_dsh1.png) no-repeat 20px center;
+    background: url(../img/total.png) no-repeat 20px -165px;
 }
 .dsh:hover{
-    background: url(../img/zy_dsh2.png) no-repeat 20px center;
+    background: url(../img/total.png) no-repeat -180px -165px;
 }
 
 .mypro{
-    background: url(../img/zy_wdxm1.png) no-repeat 20px center;
+    background: url(../img/total.png) no-repeat -380px -165px;
 }
 .mypro:hover{
-    background: url(../img/zy_wdxm2.png) no-repeat 20px center #e6e7ea;
+    background: url(../img/total.png) no-repeat -580px -165px;
 }
 .jldw{
-    background: url(../img/zy_zgdw1.png) no-repeat 20px center;
+    background: url(../img/total.png) no-repeat -380px -207px;
 }
 .jldw:hover{
-    background: url(../img/zy_zgdw2.png) no-repeat 20px center;
+    background: url(../img/total.png) no-repeat -580px -207px;
 }
 .rz{
     width:80%;
@@ -322,8 +344,13 @@ input::-webkit-input-placeholder{
 }
 .header .logoright{
     display:inline-block;
-    height:54px;
-    line-height: 54px;
+    margin-top:8px;
+    font-size: 24px;
+    height:40px;
+    line-height:40px;
+    border-left: 1px solid #d6d7dc;
+    margin-left: 20px;
+    padding-left: 16px;
 }
 .header .back{
     float: right;
@@ -341,6 +368,11 @@ input::-webkit-input-placeholder{
     width:761px;
     float: left;
     padding-left:29px;
+
+}
+.registerinput input{
+    border:1px solid #dadbdf;
+    font-size: 18px;
 }
 .registerinput .yzm{
     height:50px;
@@ -349,17 +381,21 @@ input::-webkit-input-placeholder{
 .registerinput .yzm p{
     width:300px;
     height:46px;
-    border:1px solid #a9a9a9;
+    /*border:1px solid #a9a9a9;*/
 }
 .registerinput .yzm p input{
     width:168px;
-    border:none;
+    height:46px;
     float: left;
+}
+.registerinput input:focus{
+    outline: none;
+    border-color:#00a0e8;
 }
 .registerinput .yzm p .getyzm{
     float: left;
-    width:123px;
-    height:42px;
+    width:120px;
+    height:47px;
     margin-top:1px;
     color:#fffefe;
     border:none;
@@ -377,7 +413,7 @@ input::-webkit-input-placeholder{
     margin-bottom:20px;
 }
 .registerinput p span{
-    font-size: 17px;
+    font-size: 18px;
     margin-right: 10px;
     color:#262626;
     line-height: 50px;
@@ -405,6 +441,7 @@ input::-webkit-input-placeholder{
     border:0;
     outline: none;
     cursor: pointer;
+    font-size: 24px;
 }
 .registerinput .btn{
     width:300px;
@@ -429,26 +466,28 @@ input::-webkit-input-placeholder{
 }
 .weixin{
     float:left;
+    width:160px;
+    height:187px;
+    background: url(../img/total.png) no-repeat -400px -303px;
 }
 /*认证个人信息页面样式*/
-.identifybodyrz{
-    width:1198px;
-    height:1100px;
-    /*overflow: hidden;*/
-    margin:0 auto;
-    margin-top:20px;
-    marin-bottom:30px;
-    background: #ffffff;
-    border:1px solid #d6d7dc;
-}
-.identifybodyrz h3{
-    height:59px;
-    border-bottom: 1px solid #d6d7dc;
-    color:#000000;
-    font-size:23px;
-    line-height:59px;
-    text-indent: 30px;
-}
+/*.identifybodyrz{*/
+    /*width:1198px;*/
+    /*height:1100px;*/
+    /*/!*overflow: hidden;*!/*/
+    /*margin:0 auto;*/
+    /*margin-top:20px;*/
+    /*marin-bottom:30px;*/
+    /*background: #ffffff;*/
+    /*border:1px solid #d6d7dc;*/
+/*}*/
+/*.identifybodyrz h3{*/
+    /*height:59px;*/
+    /*border-bottom: 1px solid #d6d7dc;*/
+    /*color:#000000;*/
+    /*font-size:24px;*/
+    /*text-indent: 30px;*/
+/*}*/
 .upbody{
     padding-left:30px;
     padding-top:20px;
@@ -521,7 +560,7 @@ input::-webkit-input-placeholder{
     height:50px;
     float: right;
 }
-.identifybodyrz .tj{
+.identifybody .tj{
     width:300px;
     height:50px;
     background: #ffa800;
@@ -529,7 +568,7 @@ input::-webkit-input-placeholder{
     margin:30px auto;
 
 }
-.identifybodyrz .tj a{
+.identifybody .tj a{
     color: #ffffff;
     font-size: 23px;
     line-height: 50px;
@@ -576,10 +615,9 @@ input::-webkit-input-placeholder{
 }
 .personalinfo dl dt{
     width:158px;
-    height:142px;
+    height:158px;
     border:1px solid #d6d7dc;
     background: #f1f1f1;
-    padding-top:16px;
     margin-bottom: 10px;
 }
 .personalinfo dl dd a{
@@ -676,18 +714,30 @@ input::-webkit-input-placeholder{
     font-size:18px;
 
 }
+.layui-btn-mini{
+    border:none;
+    width:15px;
+    height:15px;
+}
+.adds{
+    background: url(../img/total.png) no-repeat -649px -127px;
+}
+.dels{
+    background: url(../img/total.png) no-repeat -721px -127px;
+}
+.qx{
+    background: url(../img/total.png) no-repeat -683px -127px;
+}
+.sadds{
+    background: url(../img/total.png) no-repeat -600px -127px;
+}
+/*修改手机号码页面*/
+.main{
+    padding-top:30px;
+}
 
 
-
-
-
-
-
-
-
-
-
-
+/*用户协议页面*/
 
 
 

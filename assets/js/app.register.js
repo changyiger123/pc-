@@ -8,7 +8,7 @@ layui.use('layer', function() {
     var layer = layui.layer;
     var psd = $("input[name='psd']").val();
     var yzm = $("input[name='yzm']").val();
-    var rename = /^[a-zA-Z][a-zA-Z0-9]{6,16}$/;
+    var rename = /^[a-zA-Z][a-zA-Z0-9]{5,16}$/;
     var rmobile = /^1[3|4|5|8][0-9]\d{8}$/;
     $("input[name='username']").blur(function(){
         var username = $("input[name='username']").val();
@@ -20,7 +20,7 @@ layui.use('layer', function() {
     $("input[name='mobile']").blur(function(){
         var mobile = $("input[name='mobile']").val();
         if(!rmobile.test(mobile)){
-            this.placeholder='不是完整的11位手机号';
+            this.placeholder='请输入正确的手机号码';
             this.value=''
         }
     })
@@ -42,19 +42,15 @@ layui.use('layer', function() {
     $('.getyzm').on('click',function(){
         var that=this;
         var mobile = $("input[name='mobile']").val();
-        if(!rmobile.test(mobile)){
-            alert('请输入正确的手机号码！')
-        }else{
-            ajaxData('code/send.html',"username="+mobile+"&type=reg",function(data){
-                console.log(data);
-                if(data.code==0){
-                    settime(that);
-                    layer.msg("验证码已发送到您的手机");
-                }else{
-                    layer.msg(data.message, {icon: 5});
-                }
-            })
-        }
+        ajaxData('code/send.html',"username="+mobile+"&type=reg",function(data){
+            console.log(data);
+            if(data.code==0){
+                settime(that);
+                layer.msg("验证码已发送到您的手机");
+            }else{
+                layer.msg(data.message, {icon: 5});
+            }
+        })
     })
     $(".btn").on("click",function(){
         var username = $("input[name='username']").val();
@@ -72,5 +68,12 @@ layui.use('layer', function() {
         }else{
             layer.msg("请勾选阅读并同意该协议", {icon: 5});
         }
+    })
+    $('.yhxy').click(function(){
+        layer.open({
+            type: 1,
+            title:'易工家用户协议',
+            content: '传入任意的文本或html' //这里content是一个普通的String
+        });
     })
 });

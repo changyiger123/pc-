@@ -7,6 +7,7 @@ function settime(val) {
         val.removeAttribute("disabled");
         val.value="获取验证码";
         countdown = 60;
+        return;
     } else {
         val.setAttribute("disabled", true);
         val.value="重新发送(" + countdown + ")";
@@ -52,7 +53,7 @@ $('.getnew').on('click',function(){
     var thats=this;
     var newMobile=$("input[name='newMobile']").val();
     if(newMobile==''){
-        alert('用户名不能为空')
+        alert('此用户尚未注册')
     }else{
         ajaxData('code/send.html',"username="+newMobile+"&type=New",function(data){
             console.log(data);
@@ -92,10 +93,6 @@ $("#nextBtn").on("click", function() {
     }
     $('.srk').children().eq(a).show().siblings().hide();
 });
-
-
-
-
 
 
 layui.use('upload', function(){

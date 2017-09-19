@@ -10,7 +10,6 @@
     <file url="file://$PROJECT_DIR$/assets/js/app.list.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/assets/js/app.password.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/assets/js/app.profile.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/assets/js/data.json" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/assets/js/upload.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assets/js/jquery.step.min.js" charset="UTF-8" />
   </component>
 </project>
